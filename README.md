@@ -17,13 +17,13 @@ $('#search').groundcoreSearch({
 
 ## Options
 
-- searchUrl: soruce data url (*required*)
-- appendResultTo: If false, the plugin will create a div next to .form-group parent. You can set an id (or a class...) of a custom DOM element 
-- method: http method (GET or POST)
-- data: data to send (*object*)
-- searchConditions: key on which perform search
-- renderItem: format results
-- renderNoResults: format no result
+- **searchUrl**: source data url (*required*)
+- **appendResultTo**: If false, the plugin will create a div next to .form-group parent. You can set an id (or a class...) of a custom DOM element 
+- **method**: http method (GET or POST)
+- **data**: data to send (*object*)
+- **searchConditions**: key on which perform search
+- **renderItem**: format results
+- **renderNoResults**: forvmat no result
  
 ### Defaults
 
