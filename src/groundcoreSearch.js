@@ -2,7 +2,7 @@
  * Groundcore Search (jQuery Plugin)
  * version: 0.2.0
  * Requires jQuery v2.1 or later
- * Project repository: https://github.com/groundcore/form
+ * Project repository: https://github.com/groundcore/groundcoreSearch
  *
  * Copyright 2017 Alfredo Tranchedone
  *
