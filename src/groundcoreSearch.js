@@ -162,7 +162,7 @@
             if (settings.appendResultTo) {
                 $(settings.appendResultTo).append(searchResultWrapper);
             } else {
-                this.parents('.form-group').after(searchResultWrapper);
+                _this.parents('.form-group').after(searchResultWrapper);
             }
 
             if (settings.searchUrl == false) {
