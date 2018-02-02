@@ -14,7 +14,7 @@ jQuery plugin to live search a json file
 2) Add ```groundcoreSearch.min.js``` *after* jQuery and Bootstrap:
 
 ```
-<script src="/your-js/groundcoreSearch.min.js"></script>
+<script src="/your-js-dir/groundcoreSearch.min.js"></script>
 ```
 
 3) Make a search:
@@ -31,7 +31,7 @@ $('#search').groundcoreSearch({
 - **appendResultTo**: If false, the plugin will create a div next to .form-group parent. You can set an id (or a class...) of a custom DOM element 
 - **method**: http method (GET or POST)
 - **data**: data to send (*object*)
-- **searchConditions**: key on which perform search
+- **searchConditions**: key(s) on which perform search
 - **renderItem**: format results
 - **renderNoResults**: format no result
 - **minChar**: min number of chars to start search
@@ -49,13 +49,13 @@ minChar: 3,
 maxChar: 30,
 limit: 25,
 searchConditions: function (item, expression) {
-    return (item.nome.search(expression) != -1 || item.comune.nome.search(expression) != -1)
+    return (item.name.search(expression) != -1)
 },
 renderItem: function (item) {
-    return '<div>' + item.nome + '</div>';
+    return '<div>' + item.name + '</div>';
 },
 renderNoResults: function(){
-    return '<ul class="list-group"><li class="list-group-item">Nessun risultato.</li></ul>';
+    return '<ul class="list-group"><li class="list-group-item">No result.</li></ul>';
 }
 ```
 
