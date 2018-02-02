@@ -51,15 +51,17 @@
             resultWrapperCss: {},
             method: 'GET',
             data: {},
+            minChar: 3,
+            maxChar: 30,
             limit: 25,
             searchConditions: function (item, expression) {
-                return (item.nome.search(expression) != -1 || item.comune.nome.search(expression) != -1)
+                return (item.name.search(expression) !== -1)
             },
             renderItem: function (item) {
-                return '<div>' + item.nome + '</div>';
+                return '<div>' + item.name + '</div>';
             },
             renderNoResults: function(){
-                return '<ul class="list-group"><li class="list-group-item">Nessun risultato.</li></ul>';
+                return '<ul class="list-group"><li class="list-group-item">No result.</li></ul>';
             }
         }
 
@@ -99,11 +101,11 @@
 
             var q = this.value;
 
-            if (q.trim().length < 3) {
+            if (q.trim().length < settings.minChar) {
                 searchResultWrapper.empty();
             }
 
-            if (q.trim().length > 2 && q.trim().length < 30) {
+            if (q.trim().length >= settings.minChar && q.trim().length < settings.maxChar) {
                 if (regex.test(str) || e.keyCode == 8) {
                     make_call(q);
                 }
@@ -136,8 +138,10 @@
             var total_result = 0;
             $.each(dataContainer, function (k, v) {
 
+				if(total_result === settings.limit) return false;
+
                 if (settings.searchConditions(v, expression)) {
-                    html += settings.renderItem(v)
+                    html += settings.renderItem(v);
                     total_result++;
                 }
 
@@ -145,7 +149,7 @@
 
             });
 
-            if(total_result == 0){
+            if(total_result === 0){
                 html = settings.renderNoResults();
             }
 
@@ -165,7 +169,7 @@
                 _this.parents('.form-group').after(searchResultWrapper);
             }
 
-            if (settings.searchUrl == false) {
+            if (settings.searchUrl === false) {
                 alert('[groundcoreSearch] Option searchUrl not set.');
             }
 
