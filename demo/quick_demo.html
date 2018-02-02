@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GroundcoreSearch Demo</title>
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>GroundcoreSearch
+        <small>a jquery plugin</small>
+    </h1>
+    <hr>
+</div>
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-6 col-xs-12">
+            <form>
+                <p>
+                    Country in example data file: <br>Germany, France, Italy, United Kingdom, United States, Canada
+                </p>
+                <div class="form-group">
+                    <label for="search">Search Country</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </div>
+                        <input type="text"
+                               class="form-control input-lg"
+                               name="search"
+                               id="search"
+                               placeholder="Search country...">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /.row -->
+
+
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <hr>
+            <form>
+                <p>
+                    Try to type <code>carrol</code> or <code>han</code> or <code>germany</code>
+                </p>
+                <div class="form-group">
+                    <label for="search">Search Name or Country</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </div>
+                        <input type="text"
+                               class="form-control input-lg"
+                               name="search-name"
+                               id="search-name"
+                               placeholder="Search name or country...">
+                    </div>
+                </div>
+                <div id="searchNameResult"></div>
+            </form>
+        </div>
+    </div>
+    <!-- /.row -->
+</div>
+
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="js/groundcoreSearch.min.js"></script>
+<script>
+    $(function () {
+        $('#search').groundcoreSearch({
+            limit:5,
+            searchUrl: 'data/example_data.json',
+            searchConditions: function (item, expression) {
+                return (item.country.search(expression) !== -1)
+            },
+            renderItem: function (item) {
+                return '<a href="javascript:;" onclick="alert(\'Do some action...\')" class="list-group-item">' +
+                    '   <h4 class="list-group-item-heading">' + item.name + '</h4>' +
+                    '   <p class="list-group-item-text">' +
+                    '       <span class="glyphicon glyphicon-map-marker"></span> '+ item.city +' @ ' + item.country +
+                    '   </p>' +
+                    '</a>';
+            },
+            renderNoResults: function () {
+                return '<ul class="list-group">' +
+                    '<li class="list-group-item"> ' +
+                    '<p>No result.</p>' +
+                    '</li>' +
+                    '</ul>';
+            }
+        });
+
+
+        $('#search-name').groundcoreSearch({
+            searchUrl: 'data/example_data.json',
+            appendTo:'#searchNameResult',
+            searchConditions: function (item, expression) {
+                return (item.name.search(expression) !== -1 || item.country.search(expression) !== -1)
+            },
+            renderItem: function (item) {
+                return '<a href="javascript:;" onclick="alert(\'Do some action...\')" class="list-group-item">' +
+                    '   <h4 class="list-group-item-heading">' + item.name + '</h4>' +
+                    '   <p class="list-group-item-text">' +
+                    '       <span class="glyphicon glyphicon-map-marker"></span> '+ item.city +' @ ' + item.country +
+                    '   </p>' +
+                    '</a>';
+            },
+            renderNoResults: function () {
+                return '<ul class="list-group">' +
+                    '<li class="list-group-item"> ' +
+                    '<p>No result.</p>' +
+                    '</li>' +
+                    '</ul>';
+            }
+        });
+
+    });
+</script>
+</body>
+</html>
